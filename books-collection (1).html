@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full Collection — Shohruh Xamrayev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">Shohruh</a>
+    <nav class="primary">
+      <a href="books.html" class="active">books</a>
+      <a href="journal.html">journal</a>
+      <a href="essays.html">essays</a>
+      <a href="projects.html">projects</a>
+      <a href="studio.html">studio</a>
+    </nav>
+  <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 class="page-title">Full Collection</h1>
+  <p><a href="books.html">&larr; back to books</a></p>
+
+  <div class="books-grid collection-grid" id="collectionGrid" style="margin-top: 32px;"></div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <a href="https://www.linkedin.com/in/shohruh-xamrayev-4703a8361" target="_blank" rel="noopener">LinkedIn</a>
+    <span class="divider">|</span>
+    <a href="https://github.com/shohruhxamrayev" target="_blank" rel="noopener">GitHub</a>
+    <span class="divider">|</span>
+    <a href="https://x.com/shohruhxamrayev" target="_blank" rel="noopener">Twitter</a>
+    <span class="divider">|</span>
+    <a href="https://t.me/shohruhxamrayev" target="_blank" rel="noopener">Telegram</a>
+  </div>
+</footer>
+
+<script src="books-data.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var grid = document.getElementById('collectionGrid');
+    if (!grid || typeof booksData === 'undefined') return;
+    booksData.forEach(function (book) {
+      var card = document.createElement('a');
+      card.className = 'book-card';
+      card.href = 'books.html#' + book.slug;
+      card.innerHTML =
+        '<img class="book-card-cover" src="' + book.cover + '" alt="' + book.title + ' cover">' +
+        '<div class="book-card-title">' + book.title + '</div>' +
+        '<div class="book-card-author">' + book.author + '</div>';
+      grid.appendChild(card);
+    });
+  });
+</script>
+<script src="script.js"></script>
+</body>
+</html>
