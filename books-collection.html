@@ -80,7 +80,7 @@
     booksData.forEach(function (book) {
       var card = document.createElement('a');
       card.className = 'book-card';
-      card.href = 'books.html#' + book.slug;
+      card.href = 'books/' + book.slug + '.html';
       card.dataset.status = book.status;
       card.dataset.title = book.title.toLowerCase();
       card.dataset.author = book.author.toLowerCase();
