@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Collection — Shohruh Xamrayev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">Shohruh</a>
+    <nav class="primary">
+      <a href="books.html" class="active">books</a>
+      <a href="journal.html">journal</a>
+      <a href="essays.html">essays</a>
+      <a href="projects.html">projects</a>
+      <a href="studio.html">studio</a>
+    </nav>
+  <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back-link" href="books.html">&larr; Back to the shelf</a>
+
+  <h1 class="page-title">The collection</h1>
+  <p style="color:var(--muted); margin: -20px 0 28px;">Every book on the shelf. Search the shelf, or filter by status.</p>
+
+  <div class="collection-search-wrap">
+    <input type="text" class="collection-search" id="bookSearch" placeholder="Search by title or author">
+  </div>
+
+  <div class="tab-row">
+    <button class="tab-btn active" data-filter="all">All 5</button>
+    <button class="tab-btn" data-filter="read">Read 4</button>
+    <button class="tab-btn" data-filter="reading">Reading 1</button>
+  </div>
+
+  <div class="collection-grid" id="bookGrid">
+    <div class="grid-card" data-status="reading" data-title="the psychology of money" data-author="morgan housel">
+      <a href="book-psychologyofmoney.html"><img src="https://covers.openlibrary.org/b/isbn/9780857197689-L.jpg" alt="The Psychology of Money cover"></a>
+      <h4><a href="book-psychologyofmoney.html">The Psychology of Money</a></h4>
+      <p class="byline">Morgan Housel</p>
+    </div>
+    <div class="grid-card" data-status="read" data-title="quiet" data-author="susan cain">
+      <a href="book-quiet.html"><img src="https://covers.openlibrary.org/b/isbn/9780307352156-L.jpg" alt="Quiet cover"></a>
+      <h4><a href="book-quiet.html">Quiet</a></h4>
+      <p class="byline">Susan Cain</p>
+    </div>
+    <div class="grid-card" data-status="read" data-title="inferno" data-author="dan brown">
+      <a href="book-inferno.html"><img src="https://covers.openlibrary.org/b/isbn/9780804172264-L.jpg" alt="Inferno cover"></a>
+      <h4><a href="book-inferno.html">Inferno</a></h4>
+      <p class="byline">Dan Brown</p>
+    </div>
+    <div class="grid-card" data-status="read" data-title="before the coffee gets cold" data-author="toshikazu kawaguchi">
+      <a href="book-beforethecoffee.html"><img src="https://covers.openlibrary.org/b/isbn/9781799920922-L.jpg" alt="Before the Coffee Gets Cold cover"></a>
+      <h4><a href="book-beforethecoffee.html">Before the Coffee Gets Cold</a></h4>
+      <p class="byline">Toshikazu Kawaguchi</p>
+    </div>
+    <div class="grid-card" data-status="read" data-title="a little life" data-author="hanya yanagihara">
+      <a href="book-alittlelife.html"><img src="https://covers.openlibrary.org/b/isbn/9780804172707-L.jpg" alt="A Little Life cover"></a>
+      <h4><a href="book-alittlelife.html">A Little Life</a></h4>
+      <p class="byline">Hanya Yanagihara</p>
+    </div>
+  </div>
+</main>
+
+<script src="script.js"></script>
+<script>
+  var search = document.getElementById('bookSearch');
+  var tabs = document.querySelectorAll('.tab-btn');
+  var cards = document.querySelectorAll('.grid-card');
+  var activeFilter = 'all';
+
+  function applyFilters() {
+    var query = search.value.trim().toLowerCase();
+    cards.forEach(function (card) {
+      var matchesFilter = activeFilter === 'all' || card.dataset.status === activeFilter;
+      var matchesSearch = !query || card.dataset.title.includes(query) || card.dataset.author.includes(query);
+      card.classList.toggle('is-hidden', !(matchesFilter && matchesSearch));
+    });
+  }
+
+  search.addEventListener('input', applyFilters);
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      activeFilter = tab.dataset.filter;
+      applyFilters();
+    });
+  });
+</script>
+</body>
+</html>
